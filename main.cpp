@@ -43,9 +43,9 @@ cout<<"lines: " <<std::count(str.begin(), str.end(), '\n')<<" chars: "<<str.size
 }
 
 int main(int argc, char * argv[]){
-	string prefix,filetype;
-	int pad_zeros;
-	int start,end;
+	string prefix="",filetype="";
+	int pad_zeros=0;
+	int start=0,end=0;
 
 	if(argc==5){
 
