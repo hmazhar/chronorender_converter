@@ -47,12 +47,23 @@ int main(int argc, char * argv[]){
 	int pad_zeros;
 	int start,end;
 
+	if(argc==5){
+
 	prefix = argv[1];
 	pad_zeros = atoi(argv[2]);
 	filetype= argv[3];
 
 	start = atoi(argv[4]);
 	end = atoi(argv[5]);
+}else if(argc==6){
+
+	pad_zeros = atoi(argv[1]);
+	filetype= argv[2];
+
+	start = atoi(argv[3]);
+	end = atoi(argv[4]);
+
+}
 
 
 for(int i=start; i<end; i++){
