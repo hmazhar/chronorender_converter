@@ -31,15 +31,17 @@ string GenerateShape(int type, float rad_x, float rad_y, float rad_z) {
 	return output.str();
 }
 
-string GenerateLine(float pos_x, float pos_y, float pos_z, float quat_w, float quat_x, float quat_y, float quat_z, int type, float rad_x, float rad_y, float rad_z) {
+string GenerateLine(int i, float pos_x, float pos_y, float pos_z, float quat_w, float quat_x, float quat_y, float quat_z, int type, float rad_x, float rad_y, float rad_z) {
 	stringstream output;
 
-	output << "g" << type << "," << pos_x << "," << pos_y << "," << pos_z << "," << quat_w << "," << quat_x << "," << quat_y << "," << quat_z << "," << GenerateShape(type, rad_x, rad_y, rad_z)
+	output << "g" << type <<","<<i<< "," << pos_x << "," << pos_y << "," << pos_z << "," << quat_w << "," << quat_x << "," << quat_y << "," << quat_z << "," << GenerateShape(type, rad_x, rad_y, rad_z)
 			<< endl;
 	return output.str();
 }
 
 void Convert(string input, string output) {
+
+	cout<<input<<" "<<output<<endl;
 	ifstream t(input.c_str());
 	string str;
 	t.seekg(0, std::ios::end);
@@ -57,8 +59,9 @@ void Convert(string input, string output) {
 	float pos_x, pos_y, pos_z;
 	float quat_w, quat_x, quat_y, quat_z;
 	float vel_x, vel_y, vel_z;
+	float omg_x, omg_y, omg_z;
 	float rad_x, rad_y, rad_z;
-	int type;
+	int type=0;
 
 	stringstream data_stream(str);
 	stringstream output_stream;
@@ -66,13 +69,14 @@ void Convert(string input, string output) {
 		data_stream >> pos_x >> pos_y >> pos_z;
 		data_stream >> quat_w >> quat_x >> quat_y >> quat_z;
 		data_stream >> vel_x >> vel_y >> vel_z;
-		data_stream >> type;
+		data_stream >> omg_x >> omg_y >> omg_z;
+		//data_stream >> type;
 
 		if (type == 0) {
-			data_stream >> rad_x;
+			//data_stream >> rad_x;
+			rad_x = .03;
 		}
-
-		output_stream<<GenerateLine(pos_x, pos_y, pos_z, quat_w, quat_x, quat_y, quat_z, type, rad_x, rad_y, rad_z);
+		output_stream<<GenerateLine(i,pos_x, pos_y, pos_z, quat_w, quat_x, quat_y, quat_z, type, rad_x, rad_y, rad_z);
 
 	}
 	ofstream ofile(output);
