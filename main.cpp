@@ -7,7 +7,7 @@
 
 using namespace std;
 
-string ShapeTypes[] = { "sphere" };
+string ShapeTypes[] = { "sphere", "ellipsoid", "cube", "cylinder" };
 
 std::string ZeroPadNumber(int num, int pad) {
 	std::ostringstream ss;
@@ -26,8 +26,13 @@ string GenerateShape(int type, float rad_x, float rad_y, float rad_z) {
 
 	if (type == 0) {
 		output << rad_x;
+	}else if (type == 1) {
+			output << rad_x<< ","<<rad_y<< ","<<rad_z ;
+	}else if (type == 2) {
+			output << rad_x<< ","<<rad_y<<","<< rad_z;
+	}else if (type == 3) {
+			output << rad_x<< ","<<rad_y;
 	}
-
 	return output.str();
 }
 
@@ -69,12 +74,17 @@ void Convert(string input, string output) {
 		data_stream >> pos_x >> pos_y >> pos_z;
 		data_stream >> quat_w >> quat_x >> quat_y >> quat_z;
 		data_stream >> vel_x >> vel_y >> vel_z;
-		data_stream >> omg_x >> omg_y >> omg_z;
-		//data_stream >> type;
+		//data_stream >> omg_x >> omg_y >> omg_z;
+		data_stream >> type;
 
 		if (type == 0) {
-			//data_stream >> rad_x;
-			rad_x = .03;
+			data_stream >> rad_x;
+		}else if (type == 1) {
+			data_stream >> rad_x>> rad_y>> rad_z;
+		}else if (type == 2) {
+			data_stream >> rad_x>> rad_y>> rad_z;
+		}else if (type == 3) {
+			data_stream >> rad_x>> rad_y;
 		}
 		output_stream<<GenerateLine(i,pos_x, pos_y, pos_z, quat_w, quat_x, quat_y, quat_z, type, rad_x, rad_y, rad_z);
 
