@@ -7,7 +7,7 @@
 
 using namespace std;
 
-string ShapeTypes[] = { "sphere", "ellipsoid", "cube", "cylinder" };
+string ShapeTypes[] = { "sphere", "ellipsoid", "box", "cylinder" };
 
 std::string ZeroPadNumber(int num, int pad) {
 	std::ostringstream ss;
